@@ -10,16 +10,27 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import { Switch, Route } from 'react-router-dom';
+import NavigationContainer from '../NavigationContainer/index';
+import LinkListContainer from '../LinkListContainer/index';
+import LoginContainer from '../LoginContainer';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
+  // static propTypes = {
+  //   children: React.PropTypes.element
+  // };
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <NavigationContainer />
+        <Switch>
+          <Route path="/topics/:topic" component={LinkListContainer} />
+          <Route path="/login" component={LoginContainer} />
+        </Switch>
+        {this.props.children}
+      </div>
     );
   }
 }
